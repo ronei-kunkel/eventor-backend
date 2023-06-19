@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+
+  eventor-server:
+    container_name: eventor-server
+    image: hyperf/hyperf:8.2-alpine-v3.18-swoole
+    working_dir: /var/www/eventor-backend
+    entrypoint: ["php", "bin/hyperf.php", "server:watch"]
+    volumes:
+      - ./:/var/www/eventor-backend
+    ports:
+      - 80:9501
+  #   depends_on:
+  #     - eventor-mariadb
+  #     - eventor-redis
+
+  # eventor-mariadb:
+  #   container_name: eventor-mariadb
+  #   image: mariadb:lts
+  #   volumes:
+  #     - ./.docker/mariadb:/var/lib/mysql
+  #   ports:
+  #     - 3306:3306
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+  #     MYSQL_DATABASE: ${DB_DATABASE}
+
+  # eventor-redis:
+  #   container_name: eventor-redis
+  #   image: redis:alpine
+  #   ports:
+  #     - 6379:6379
